@@ -36,6 +36,7 @@ for root,dirs,files in  os.walk(config.BASE_BKP_DIR):
             num_files_ok += 1
             log.write(fname+'\n')
         except:
+            print "Error :"+fname
             num_files_fail += 1
             fail_files.append(fname)
         num_files_total += 1
