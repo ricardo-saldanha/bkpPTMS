@@ -1,8 +1,8 @@
 #!/usr/bin/python
 # -*- coding: UTF8 -*-
-import os,zipfile,config, alert,utils
+import os,config, alert,utils
 import sys 
- 
+import tarfile,zipfile
 from datetime import datetime
 from string import Template
 import os,codecs
@@ -19,7 +19,8 @@ num_files_total = 0L
 num_files_fail = 0L
 if os.path.exists(utils.get_zip_file_name()):
     os.remove(utils.get_zip_file_name())    
-zip = zipfile.ZipFile(utils.get_zip_file_name(), 'w', zipfile.ZIP_DEFLATED, True)
+#zip = zipfile.ZipFile(utils.get_zip_file_name(), 'w', zipfile.ZIP_DEFLATED, True)
+zip = tarfile.open(utils.get_zip_file_name(),'w:gz')
 log = codecs.open(filename=LOG_FILE_NAME, mode='w',encoding='utf-8')
 log.write("Lista De Arquivos Copiados:\n")
 fail_files = []
@@ -28,7 +29,7 @@ for root,dirs,files in  os.walk(config.BASE_BKP_DIR):
         try:
             fname = os.path.join(root,f) 
             print fname
-            zip.write(fname)
+            zip.add(fname)
             total_size_bytes += os.path.getsize(fname)
             num_files_ok += 1
             log.write(fname+'\n')

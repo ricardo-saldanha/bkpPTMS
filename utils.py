@@ -54,4 +54,4 @@ def get_free_space(folder):
         return -1
 
 def get_zip_file_name():    
-    return os.path.join(config.TARGET_BKP_DIR,"bkp_"+WEEKDAYS[datetime.datetime.now().weekday()]+".zip") 
+    return os.path.join(config.TARGET_BKP_DIR,"bkp_"+WEEKDAYS[datetime.datetime.now().weekday()]+".tar.gz") 
