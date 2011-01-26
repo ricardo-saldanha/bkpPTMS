@@ -29,7 +29,7 @@ for root,dirs,files in  os.walk(config.BASE_BKP_DIR):
         try:
             fname = os.path.join(root,f) 
             print fname
-            zip.add(fname)
+            zip.add(fname.encode('utf-8'))
             total_size_bytes += os.path.getsize(fname)
             num_files_ok += 1
             log.write(fname+'\n')
