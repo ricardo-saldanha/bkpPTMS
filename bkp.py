@@ -25,21 +25,8 @@ zip.format = tarfile.PAX_FORMAT
 log = codecs.open(filename=LOG_FILE_NAME, mode='w',encoding='utf-8')
 log.write("Lista De Arquivos Copiados:\n")
 fail_files = []
-for root,dirs,files in  os.walk(config.BASE_BKP_DIR):
-    for f in files:
-        try:
-            fname = os.path.join(root,f) 
-            print fname
-            zip.add(fname.encode('utf-8'))
-            total_size_bytes += os.path.getsize(fname)
-            num_files_ok += 1
-            log.write(fname+'\n')
-        except:
-            print fname
-            
-            num_files_fail += 1
-            fail_files.append(fname.encode('utf-8'))
-        num_files_total += 1
+
+zip.add(config.BASE_BKP_DIR)
         
 zip.close()
 log.close()
