@@ -31,7 +31,7 @@ for root,dirs,files in  os.walk(config.BASE_BKP_DIR):
         try:
             fname = os.path.join(root,f) 
             print fname
-            zip.add(fname)
+            zip.add(os.path.join(root,f))
             total_size_bytes += os.path.getsize(fname)
             num_files_ok += 1
             log.write(fname+'\n')
@@ -42,7 +42,9 @@ for root,dirs,files in  os.walk(config.BASE_BKP_DIR):
         num_files_total += 1
 
         
+print 'end backup'
 zip.close()
+print 'close tar'
 log.close()
 
 ## apenas ordenando o arquivo para melhor entendimento, Resumo, arquivos com falha e arq. ok.
