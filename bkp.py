@@ -21,6 +21,7 @@ if os.path.exists(utils.get_zip_file_name()):
     os.remove(utils.get_zip_file_name())    
 #zip = zipfile.ZipFile(utils.get_zip_file_name(), 'w', zipfile.ZIP_DEFLATED, True)
 zip = tarfile.open(utils.get_zip_file_name().encode('utf-8'),'w:gz')
+zip.format = tarfile.PAX_FORMAT
 log = codecs.open(filename=LOG_FILE_NAME, mode='w',encoding='utf-8')
 log.write("Lista De Arquivos Copiados:\n")
 fail_files = []
@@ -35,8 +36,9 @@ for root,dirs,files in  os.walk(config.BASE_BKP_DIR):
             log.write(fname+'\n')
         except:
             print fname
+            
             num_files_fail += 1
-            fail_files.append(u' '+fname)
+            fail_files.append(fname.encode('utf-8'))
         num_files_total += 1
         
 zip.close()
