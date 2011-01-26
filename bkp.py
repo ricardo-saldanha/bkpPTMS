@@ -26,7 +26,20 @@ log = codecs.open(filename=LOG_FILE_NAME, mode='w',encoding='utf-8')
 log.write("Lista De Arquivos Copiados:\n")
 fail_files = []
 # incluido a nova forma
-zip.add(config.BASE_BKP_DIR)
+for root,dirs,files in  os.walk(config.BASE_BKP_DIR):
+    for f in files:
+        try:
+            fname = os.path.join(root,f) 
+            print fname
+            zip.add(fname)
+            total_size_bytes += os.path.getsize(fname)
+            num_files_ok += 1
+            log.write(fname+'\n')
+        except:
+            num_files_fail += 1
+            fail_files.append(fname)
+        num_files_total += 1
+
         
 zip.close()
 log.close()
