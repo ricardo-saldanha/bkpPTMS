@@ -19,7 +19,7 @@ class Alert(object):
     '''
     gmail_user = "bkp.ptms@gmail.com"
     gmail_pwd = "bkp.ptms@."
-    smtp_user = "prt4.ptm006"
+    smtp_user = "prt4.ptm006@mpt.gov.br"
     smtp_pwd = "prt4.ptm006@."
 
     def __init__(self):
@@ -32,7 +32,7 @@ class Alert(object):
         msg = MIMEMultipart()
         msg.set_charset('utf-8')
         to = ''
-        msg['From'] = self.gmail_user
+        msg['From'] = self.smtp_user
         for e in config.EMAIL_RCPT_LIST:
             to += e + ','
         msg['To'] = to 
@@ -46,14 +46,12 @@ class Alert(object):
             Encoders.encode_base64(part)
             part.add_header('Content-Disposition',
                     'attachment; filename="%s"' % os.path.basename(attach))
-            msg.attach(part)
-        
+            msg.attach(part)        
         mailServer = smtplib.SMTP("mail.mpt.gov.br",25)
         mailServer.ehlo()
         mailServer.starttls()
         mailServer.ehlo()
-        mailServer.login(self.smtp_user, self.smtp_pwd)
-        
+        mailServer.login(self.smtp_user, self.smtp_pwd)                
         mailServer.sendmail(self.smtp_user, config.EMAIL_RCPT_LIST , msg.as_string())
         # Should be mailServer.quit(), but that crashes...
         mailServer.close()
