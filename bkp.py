@@ -25,15 +25,16 @@ zip.format = tarfile.PAX_FORMAT
 log = codecs.open(filename=LOG_FILE_NAME, mode='w',encoding='utf-8')
 log.write("Lista De Arquivos Copiados:\n")
 fail_files = []
-
+# incluido a nova forma
 zip.add(config.BASE_BKP_DIR)
         
 zip.close()
 log.close()
+
 ## apenas ordenando o arquivo para melhor entendimento, Resumo, arquivos com falha e arq. ok.
 l = codecs.open(filename=LOG_FILE_NAME, mode='r',encoding='utf-8')
 txt = l.read()
-l.close()
+l.close() 
 
 log = codecs.open(filename=LOG_FILE_NAME, mode='w',encoding='utf-8')
 
