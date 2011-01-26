@@ -34,8 +34,9 @@ for root,dirs,files in  os.walk(config.BASE_BKP_DIR):
             num_files_ok += 1
             log.write(fname+'\n')
         except:
+            print fname
             num_files_fail += 1
-            fail_files.append(fname)
+            fail_files.append(u' '+fname)
         num_files_total += 1
         
 zip.close()
