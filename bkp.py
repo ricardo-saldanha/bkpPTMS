@@ -27,22 +27,7 @@ try:
     log.write("Lista De Arquivos Copiados:\n")
     fail_files = []
     # incluido a nova forma
-    for root,dirs,files in  os.walk(config.BASE_BKP_DIR):
-        for f in files:
-            try:
-                fname = os.path.join(root,f) 
-                print fname
-                zip.add(os.path.join(root,f))
-                total_size_bytes += os.path.getsize(fname)
-                num_files_ok += 1
-                log.write(fname+'\n')
-            except:
-                print "Error :"+fname
-                num_files_fail += 1
-                fail_files.append(fname)
-            num_files_total += 1
-    
-            
+    zip.add(config.BASE_BKP_DIR)            
     print 'end backup'
     zip.close()
     print 'close tar'
@@ -128,8 +113,7 @@ try:
         log.write(u"\n   Não existem arquivos com falhas!  \n\n")
     else:
         for fname in fail_files:
-            log.write(fname+'\n')
-    
+            log.write(fname+'\n')    
     log.write(txt)
     log.close()
 finally:
