@@ -34,5 +34,6 @@ except Exception as e:
     print e
     msg += "\n Erro do sistema:\n"+str(e)
     alert.Alert().mail("Falha ! Verifique ! Backup PTM:"+config.PTM_NAME, msg,None)
-    
+finally:
+    os.system(config.UNMAP_COMMAND)
     
